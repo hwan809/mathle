@@ -53,9 +53,22 @@ Correct! You solved it in 4 attempt(s).
 
 In this example, the hidden answer was `1+4=5`. Invalid inputs (e.g., syntactically broken or mathematically incorrect equations) are rejected without consuming an attempt.
 
+12. Before a game begins, the game displays a stage selection menu offering three options: `[1] Easy`, `[2] Normal`, `[3] Hard`. The player selects a stage by entering 1, 2, or 3.
+
+13. If the player enters anything other than `1`, `2`, or `3` at the stage selection prompt, the game prints an error and re-prompts. This does not start the game.
+
+14. In **Easy** stage, the answer equation pool is restricted to equations using only `+` and `-` operators. All other rules (requirements 1–11) apply. The player has 6 attempts.
+
+15. In **Normal** stage, all four operators (`+`, `-`, `*`, `/`) are available. This is identical to the behavior described in requirements 1–11. The player has 6 attempts.
+
+16. In **Hard** stage, all four operators are available, but the player has only 5 attempts instead of 6. All other rules (requirements 1–11) apply.
+
+17. After the game ends (win or loss), the game asks `Play again? (y/n)`. If the player enters `y` or `Y`, the game returns to the stage selection screen and starts a new game. If the player enters `n` or `N`, the game exits. Any other input prints an error and re-prompts.
+
 **Implementation Notes**:
 
 - The implementation is written in F# targeting .NET 10.
 - The game runs as a console application with no GUI and no external library dependencies.
 - The answer equation is randomly selected at program start using `System.Random`.
 - All user interaction occurs via standard input (`stdin`) and standard output (`stdout`).
+- Feedback symbols (G, Y, X) are displayed in color-coded cells using ANSI escape codes (green, yellow, gray respectively). The symbols themselves are preserved as required by requirements 2 and 8. ANSI color support requires Windows Terminal, macOS Terminal, or a Linux terminal; the symbols remain readable in non-color terminals as plain text.
